@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- SVG favicon (Chrome/Firefox/Edge/Safari 16.4+). The ?v= query busts Chrome's
+         very sticky favicon cache, which otherwise pins a stale/404 entry per origin. -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=4" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>LoopScore</title>
+    <!-- Apply the persisted theme before first paint so a reload doesn't flash the
+         wrong palette. toggleTheme() writes localStorage('loopscore-theme'); this
+         reads it back and sets the `dark` class on <html> before React mounts. -->
+    <script>
+      (function () {
+        try {
+          if (localStorage.getItem('loopscore-theme') === 'dark') {
+            document.documentElement.classList.add('dark');
+          }
+        } catch (e) { /* ignore */ }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

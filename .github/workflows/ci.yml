@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    name: backend tests + frontend build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      # Backend has ZERO runtime dependencies — just run the std-lib test runner.
+      - name: Backend tests
+        run: node --test
+      # Frontend is a build artifact; verify it compiles.
+      - name: Frontend build
+        run: |
+          npm --prefix frontend ci
+          npm --prefix frontend run build

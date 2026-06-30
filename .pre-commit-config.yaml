@@ -1,0 +1,9 @@
+# Pre-commit secret scanning. Install once:
+#   pipx install pre-commit   (or: brew install pre-commit)
+#   pre-commit install
+# Then every `git commit` is scanned for secrets before it lands.
+repos:
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.21.2
+    hooks:
+      - id: gitleaks

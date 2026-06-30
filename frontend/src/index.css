@@ -1,0 +1,256 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Light theme (DEFAULT) — clean professional: near-white surfaces, slate text,
+ * restrained blue accent, semantic green/amber/red. The neon/* tokens are also
+ * defined here, tuned DARKER + more saturated so they read clearly on white
+ * (the dark theme overrides them with their bright Catppuccin values). */
+:root {
+  --background: oklch(0.985 0.003 265);     /* app canvas — near-white, faint cool */
+  --foreground: oklch(0.26 0.02 265);       /* slate-900 text */
+  --card: oklch(1 0 0);                      /* white surfaces */
+  --card-foreground: oklch(0.26 0.02 265);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.26 0.02 265);
+  --primary: oklch(0.52 0.15 260);          /* indigo accent */
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.96 0.004 265);
+  --secondary-foreground: oklch(0.26 0.02 265);
+  --muted: oklch(0.965 0.004 265);
+  --muted-foreground: oklch(0.47 0.02 265); /* readable medium slate */
+  --accent: oklch(0.95 0.02 255);
+  --accent-foreground: oklch(0.30 0.06 260);
+  --destructive: oklch(0.58 0.20 25);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.90 0.005 265);
+  --input: oklch(0.90 0.005 265);
+  --ring: oklch(0.62 0.13 260);
+  --radius: 0.625rem;
+
+  /* Semantic/neon accents tuned for a LIGHT background. */
+  --neon-blue:    oklch(0.55 0.16 255);
+  --neon-mauve:   oklch(0.52 0.17 300);
+  --neon-peach:   oklch(0.62 0.15 55);
+  --neon-teal:    oklch(0.55 0.10 195);
+  --neon-red:     oklch(0.57 0.20 25);
+  --neon-overlay: oklch(0.58 0.02 265);
+  --neon-green:   oklch(0.55 0.14 150);
+  --neon-yellow:  oklch(0.62 0.13 80);
+  --neon-sky:     oklch(0.55 0.13 235);
+}
+
+/* Dark theme — Catppuccin Mocha base + neon accent palette. */
+.dark {
+  --background: oklch(0.196 0.018 286);     /* base    #1e1e2e */
+  --foreground: oklch(0.918 0.013 286);     /* text    #cdd6f4 */
+  --card: oklch(0.240 0.022 286);           /* surface0 #313244 */
+  --card-foreground: oklch(0.918 0.013 286);
+  --popover: oklch(0.196 0.018 286);        /* mantle  #181825 */
+  --popover-foreground: oklch(0.918 0.013 286);
+  --primary: oklch(0.778 0.137 304);        /* mauve   #cba6f7 */
+  --primary-foreground: oklch(0.196 0.018 286);
+  --secondary: oklch(0.288 0.024 286);      /* surface1 #45475a */
+  --secondary-foreground: oklch(0.918 0.013 286);
+  --muted: oklch(0.288 0.024 286);
+  --muted-foreground: oklch(0.706 0.018 286); /* overlay1 #7f849c */
+  --accent: oklch(0.798 0.150 215);         /* sapphire #74c7ec */
+  --accent-foreground: oklch(0.196 0.018 286);
+  --destructive: oklch(0.732 0.149 18);     /* red     #f38ba8 */
+  --destructive-foreground: oklch(0.196 0.018 286);
+  --border: oklch(1 0 0 / 8%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.778 0.137 304);
+
+  /* Neon accent palette — Catppuccin-inspired, used for lane chips,
+   * sparkline strokes, badges, and status dots. Reference these tokens via
+   * Tailwind's bracket arbitrary-color syntax (e.g. text-[var(--neon-blue)])
+   * or via the @theme inline alias colors below (e.g. bg-neon-blue/20).
+   *
+   * lane mapping (US-007 contract):
+   *   tools    → neon-blue
+   *   skills   → neon-mauve
+   *   hooks    → neon-peach
+   *   mcp      → neon-teal
+   *   errors   → neon-red
+   *   user/idle→ neon-overlay
+   *   live ok  → neon-green
+   *   warn     → neon-yellow
+   *   info     → neon-sky
+   */
+  --neon-blue:    oklch(0.812 0.123 257);   /* #89b4fa */
+  --neon-mauve:   oklch(0.778 0.137 304);   /* #cba6f7 */
+  --neon-peach:   oklch(0.804 0.117 56);    /* #fab387 */
+  --neon-teal:    oklch(0.847 0.078 188);   /* #94e2d5 */
+  --neon-red:     oklch(0.732 0.149 18);    /* #f38ba8 */
+  --neon-overlay: oklch(0.706 0.018 286);   /* #a6adc8 */
+  --neon-green:   oklch(0.844 0.137 142);   /* #a6e3a1 */
+  --neon-yellow:  oklch(0.901 0.107 95);    /* #f9e2af */
+  --neon-sky:     oklch(0.847 0.099 230);   /* #89dceb */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-neon-blue:    var(--neon-blue);
+  --color-neon-mauve:   var(--neon-mauve);
+  --color-neon-peach:   var(--neon-peach);
+  --color-neon-teal:    var(--neon-teal);
+  --color-neon-red:     var(--neon-red);
+  --color-neon-overlay: var(--neon-overlay);
+  --color-neon-green:   var(--neon-green);
+  --color-neon-yellow:  var(--neon-yellow);
+  --color-neon-sky:     var(--neon-sky);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-sans: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  html {
+    color-scheme: light;
+    font-size: 17px; /* lift the whole rem-based type scale (text-xs/sm/base/lg/…) for readability */
+  }
+  html.dark {
+    color-scheme: dark;
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-mono);
+    font-feature-settings: "calt" 1, "ss01" 1;
+  }
+
+  /* ── No-overflow guardrails (design 2026-06-28) ───────────────────────────
+   * Make horizontal overflow structurally impossible regardless of content or
+   * viewport. These are zero-/low-specificity so component styles still win. */
+
+  /* Root cause #1: flex/grid items default to min-width:auto and refuse to shrink
+   * below their content, bursting the container. Force min-width:0 on the common
+   * block/flex-child elements (a no-op in normal block flow). */
+  :where(div, section, article, header, footer, main, nav, aside, ul, ol, li, p,
+    h1, h2, h3, h4, h5, h6, form, label, figure, table) {
+    min-width: 0;
+  }
+
+  /* Root cause #2: long unbreakable tokens (UUIDs, paths, role/skill names) never
+   * overflow — they break when there's no other choice (also shrinks flex min-content). */
+  body {
+    overflow-wrap: anywhere;
+  }
+
+  /* Root cause #3: intrinsic-width / replaced elements never exceed their container
+   * (a native <select> otherwise sizes to its WIDEST option). */
+  :where(img, svg, video, canvas, select, input, textarea, table) {
+    max-width: 100%;
+  }
+
+  /* Final safety net: the app root never produces page-level horizontal scroll.
+   * `clip` (not `hidden`) avoids creating a scroll container / breaking sticky. */
+  #root {
+    overflow-x: clip;
+  }
+
+  /* Every landmark region clips horizontally → a too-wide child is contained within
+   * its region and can never spill onto siblings or widen the page. Real content still
+   * wraps/truncates gracefully via the layout primitives; this is the structural backstop. */
+  :where(header, nav, main, footer, aside) {
+    overflow-x: clip;
+  }
+}
+
+/* Density tokens (US-013).
+ *
+ * Density is set on <html> as `data-density="comfortable" | "compact"`. CSS
+ * variables here drive panel padding, internal gaps, grid gap, and the
+ * preferred column min-width — so a single attribute flip restyles everything
+ * without re-rendering the React tree. The component layer references these
+ * via `style={{ padding: 'var(--ds-panel-py) var(--ds-panel-px)', gap: '...' }}`
+ * (AgentPanel) or the `.agent-grid` rule (gap + min-col).
+ */
+:root,
+:root[data-density='comfortable'] {
+  --ds-grid-gap: 1rem;
+  --ds-panel-px: 1rem;
+  --ds-panel-py: 1rem;
+  --ds-panel-gap: 0.75rem;
+  --ds-panel-min: 18rem;
+  --ds-col-min: 22rem;
+}
+:root[data-density='compact'] {
+  --ds-grid-gap: 0.625rem;
+  --ds-panel-px: 0.75rem;
+  --ds-panel-py: 0.625rem;
+  --ds-panel-gap: 0.5rem;
+  --ds-panel-min: 15.5rem;
+  --ds-col-min: 18rem;
+}
+
+/* Agent panel auto-grid (US-006, density-aware in US-013).
+ *   <768px : single column stack (mobile)
+ *   ≥768px : auto-fill, minmax(min(100%, --ag-min-col), 1fr)
+ * Max-column cap is applied by the AgentGrid component as an inline max-width.
+ * Grid items stretch to equal heights — that's how multi-panel rows align.
+ */
+.agent-grid {
+  display: grid;
+  gap: var(--ds-grid-gap, 1rem);
+  grid-template-columns: 1fr;
+  width: 100%;
+  align-items: stretch;
+}
+.agent-grid > * {
+  min-width: 0;
+}
+/* Bento zoom (Phase 4): the zoomed cell spans two columns; siblings dim + shrink.
+ * Transitions make the emphasis smooth. The wrapper is a flex box so the inner
+ * AgentPanel (h-full/w-full) still stretches to the (now larger) cell. */
+.agent-grid > .agent-cell {
+  display: flex;
+  min-width: 0;
+  overflow: hidden; /* each card cell clips → a panel's content can never spill onto neighbors */
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+@media (min-width: 768px) {
+  .agent-grid > .agent-cell.agent-zoomed {
+    grid-column: span 2;
+  }
+}
+.agent-grid > .agent-cell.agent-dimmed {
+  opacity: 0.5;
+  transform: scale(0.97);
+}
+@media (min-width: 768px) {
+  .agent-grid {
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(min(100%, var(--ag-min-col, var(--ds-col-min, 22rem))), 1fr)
+    );
+  }
+}

@@ -1,0 +1,13 @@
+node_modules/
+.env
+golden/.work/
+*.log
+.DS_Store
+data/
+loopscore.local.json
+
+# Internal design docs / specs / experiments — kept local, not published
+docs/
+specs/
+tasks/
+scripts/ralph/

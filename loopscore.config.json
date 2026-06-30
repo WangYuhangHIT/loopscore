@@ -1,0 +1,28 @@
+{
+  "port": 4319,
+  "idleSeconds": 60,
+  "loopErrorStreak": 3,
+  "loopEditsThreshold": 8,
+  "testCommandPattern": "jest|npm (run )?test|node --test|vitest|pytest",
+  "timelineWindow": 500,
+  "snippetMaxChars": 200,
+  "capWindow": 40,
+  "judge": {
+    "enabled": true,
+    "provider": "anthropic",
+    "baseUrl": "https://api.anthropic.com/v1",
+    "model": "claude-haiku-4-5-20251001",
+    "temperature": 0,
+    "userAgent": "loopscore/1.0",
+    "apiKeyEnv": "LOOPSCORE_JUDGE_KEY",
+    "maxPerSession": 20,
+    "contextWindow": 8,
+    "minIntervalMs": 3000,
+    "maxTokens": 512,
+    "review": { "intervalMs": 120000, "minNewEvents": 20 }
+  },
+  "golden": {
+    "permissionMode": "acceptEdits",
+    "maxBudgetUsd": 0.5
+  }
+}
